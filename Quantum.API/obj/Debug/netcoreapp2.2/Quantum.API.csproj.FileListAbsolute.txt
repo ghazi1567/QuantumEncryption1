@@ -1,0 +1,16 @@
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.deps.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.runtimeconfig.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.runtimeconfig.dev.json
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.dll
+D:\Projects\POC\QuantumEncryption\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.pdb
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorAssemblyInfo.cache
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorAssemblyInfo.cs
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.AssemblyInfoInputs.cache
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.AssemblyInfo.cs
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorTargetAssemblyInfo.cache
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.dll
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.pdb
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.csprojAssemblyReference.cache

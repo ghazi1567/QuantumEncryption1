@@ -1,0 +1,222 @@
+﻿@page
+@model QuantumEncryption.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<style>
+    table th, table td {
+        text-align: center !important;
+    }
+
+    .form-check-label {
+        margin-bottom: 0;
+        margin-left: 20px;
+    }
+</style>
+<form id="register-form" method="post" action="https://quantumapi.azurewebsites.net/api/Users">
+    <div class="row">
+
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" name="Name"  aria-describedby="emailHelp" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">CNIC</label>
+                <input type="text" class="form-control" name="CNIC" placeholder="CNIC" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Key Length</label>
+                <select class="form-control" id="Key" name="KeyLength" onchange="keyChange()" required>
+                    <option value="">select key length</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                </select>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="agree" id="exampleCheck1" required>
+                <label class="form-check-label" for="exampleCheck1">Check you have provide the correct information it would be use for communication over the network</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        <div class="col-md-6">
+            <label for="exampleInputEmail1">Select Bases</label>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                        <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                        <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                        <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(0,0)">0 &#xb0;</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(45,0)">45 &#xb0;</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(90,1)">90 &#xb0;</button></td>
+                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(135,1)">135 &#xb0;</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <label for="exampleInputEmail1">Selected Bases</label>
+            <a href="javascript:void(0);" onclick="ResetBases();">Reset</a>
+            <table class="table table-bordered" id="selectedBases">
+                <tbody>
+                    @*<tr>
+                            <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                            <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                            <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                            <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                        </tr>
+                        <tr>
+                            <td>0 &#xb0;</td>
+                            <td>0 &#xb0;</td>
+                            <td>0 &#xb0;</td>
+                            <td>0 &#xb0;</td>
+                        </tr>*@
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</form>
+
+@section Scripts{
+
+    <script>
+
+        $('#register-form').submit(function (event) {
+            event.preventDefault(); //prevent default action
+            if (selectedBase.length == 0 || selectedBase.length != parseInt($("#Key option:selected").val())) {
+                alert('Selected base did not matched with key length');
+                return;
+            }
+
+
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            //var form_data = $(this).serialize(); //Encode form elements for submission
+            var form_data = JSON.stringify(objectifyForm($(this).serializeArray()));
+            console.log(form_data);
+
+            $.ajax({
+                contentType: "application/json",
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) { //
+
+                alert('User registered successfully...');
+                location.reload();
+            }).fail(function (xhr, status, error) {
+                //Ajax request failed.
+                var errorMessage = xhr.status + ': ' + xhr.statusText
+                alert('Error - ' + errorMessage);
+            })
+        });
+
+        function objectifyForm(formArray) {//serialize data function
+
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++) {
+                returnArray[formArray[i]['name']] = formArray[i]['value'];
+            }
+            returnArray.UserBases = selectedBase;
+            console.log(returnArray);
+            return returnArray;
+        }
+
+
+        var selectedBase = new Array();
+        var col = 0;
+        function keyChange() {
+            var value = $("#Key option:selected").val();
+            console.log(value);
+            col = parseInt(value);
+            puplateBases()
+
+
+        }
+
+        function BaseSelection(value,bit) {
+            if (col == 0) {
+                alert('Please select key length');
+                return;
+            }
+          var obj =  {
+              Degree :value,
+              Bit:bit
+            }
+            selectedBase.push(obj);
+            puplateBases();
+        }
+
+        function puplateBases() {
+            var head = '<tr>';
+            var row = '<tr>';
+            for (var i = 0; i < col; i++) {
+
+                head += '<th scope="col">' + getHeadValue(i) + '</th>';
+                row += '<th scope="col">' + getRowValue(i) + '</th>';
+
+            }
+            head += '</tr>';
+            row += '</tr>';
+            $('#selectedBases tbody').empty().append(head).append(row);
+        }
+
+        function getHeadValue(index) {
+            if (selectedBase.length > 0) {
+                if (typeof selectedBase[index] !== 'undefined') {
+                    if (selectedBase[index].Degree == 0) {
+                        return '<span class="glyphicon glyphicon-arrow-right" aria-hidden="true">';
+                    }
+                    return '<span style="transform: rotate(-' + selectedBase[index].Degree + 'deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true">';
+                }
+                else {
+                    return '';
+                }
+
+            } else {
+                return '';
+            }
+        }
+        function getRowValue(index) {
+            if (selectedBase.length > 0) {
+                if (typeof selectedBase[index] !== 'undefined') {
+                    return '' + selectedBase[index].Degree + ' &#xb0;';
+                }
+                else {
+                    return '';
+                }
+
+            } else {
+                return '';
+            }
+        }
+        function ResetBases() {
+            selectedBase = new Array();
+            puplateBases();
+        }
+
+    </script>
+}

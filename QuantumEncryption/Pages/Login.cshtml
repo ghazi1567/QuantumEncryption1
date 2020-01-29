@@ -1,0 +1,60 @@
+﻿@page
+@model QuantumEncryption.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<style>
+    table th,table td {
+        text-align: center !important;
+    }
+    .form-check-label {
+    margin-bottom: 0;
+    margin-left: 20px;
+}
+</style>
+<form id="login-form" method="post" action="https://quantumapi.azurewebsites.net/api/Users/Login">
+    <div class="row">
+
+
+        <div class="col-md-6" id="login-div">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">CNIC</label>
+                <input type="text" class="form-control" name="CNIC" placeholder="CNIC" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+            </div>
+            
+            <button type="submit" id="btn-login" class="btn btn-primary">Login</button>
+        </div>
+        <div class="col-md-6" id="base-div" style="display:none">
+
+            <label for="exampleInputEmail1">Bases From CIA</label>
+            <div class="well well-large" id="cia-base-div">
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" style="transform: rotate(-45deg);" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" style="transform: rotate(-90deg);" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" style="transform: rotate(-135deg);" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" style="transform: rotate(-45deg);" aria-hidden="true"></span>
+
+            </div>
+            <label for="exampleInputEmail1">Confirmed Bases</label>
+            <table class="table table-bordered" id="tbl-user-bases">
+                <thead>
+                   
+                </thead>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</form>

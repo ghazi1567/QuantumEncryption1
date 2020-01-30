@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Quantum.API.Helper;
 
 namespace Quantum.API.Controllers
 {
@@ -22,9 +23,11 @@ namespace Quantum.API.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<string> Get(string id)
         {
-            return "value";
+            var aa  = RSA.Encryption(id, false);
+            var bb = RSA.Decryption(aa, false);
+            return bb;
         }
 
         // POST api/values

@@ -13,4 +13,3 @@ D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.AP
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorTargetAssemblyInfo.cache
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.dll
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.pdb
-D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.csprojAssemblyReference.cache

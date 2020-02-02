@@ -15,5 +15,6 @@ namespace Quantum.API.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserBase> UserBases { get; set; }
+        public DbSet<TempTable> TempTables { get; set; }
     }
 }

@@ -78,9 +78,6 @@ namespace Quantum.API.Helper
             string fn = "";
             // End of variables declaration
 
-            Random rnd1 = new Random(10);
-            Random rnd2 = new Random(10);
-            
             //p = prime1.longValue();
             //q = prime2.longValue();
           

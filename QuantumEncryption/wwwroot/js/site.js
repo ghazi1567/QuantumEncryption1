@@ -13,14 +13,19 @@ var quantumModule;
             var init = function () {
                 $frmLogin = $('#login-form');
                 $tblUserBases = $('#tbl-user-bases thead');
-
+                $btnKeyRequest = $('#btn-key-request');
+                $btnSendData = $('#btn-send-data');
                 $divLogin = $('#login-div');
                 $divBase = $('#base-div');
                 $divCIABase = $('#cia-base-div');
                 $divBase.hide();
+                $btnKeyRequest.hide();
                 $divLogin.show();
                 $divCIABase.empty();
 
+                $txtUserId = $('#txt-UserId');
+                $txtUserName = $('#txt-UserName');
+                $txtUserKey = $('#txt-UserKey');
             };
 
             var bindEvents = function () {
@@ -37,7 +42,9 @@ var quantumModule;
                         type: request_method,
                         data: form_data
                     }).done(function (response) { //
-                      
+                        $btnKeyRequest.show();
+                        $txtUserId.val(response.userId);
+                        $txtUserName.val(response.name);
                         showUserBases(response);
                     }).fail(function (xhr, status, error) {
                         //Ajax request failed.
@@ -45,7 +52,10 @@ var quantumModule;
                         alert('Error - ' + errorMessage);
                     })
                 });
-
+                $btnKeyRequest.click(function () {
+                    $divBase.show();
+                    getQKBit();
+                });
             }
             function objectifyForm(formArray) {//serialize data function
 
@@ -56,11 +66,11 @@ var quantumModule;
                 return returnArray;
             }
             function showUserBases(obj) {
-                $divBase.show();
+                
                 $divLogin.hide();
                 userBase = obj.userBases;
 
-                getQKBit();
+              
 
 
                
@@ -100,7 +110,7 @@ var quantumModule;
                 if (matched) {
                     confirmedBases.push(userBase[currentIndex]);
                     currentIndex = currentIndex + 1;
-                    
+                  
                     showConfirmedBases();
                     getQKBit();
                 } else {
@@ -111,12 +121,13 @@ var quantumModule;
 
             function getQKBit() {
                 if (currentIndex > userBase.length - 1) {
+                    $btnSendData.show();
                     return;
                 }
                 // ajax call here
                 $.ajax({
                     contentType: "application/json",
-                    url: 'https://quantumapi.azurewebsites.net/api/Common',
+                    url: 'https://localhost:44348/api/Common',
                     type: 'get'
                 }).done(function (response) { //
                     RequestBit(response);
@@ -131,6 +142,14 @@ var quantumModule;
 
             function isMatched(bit) {
                 if (bit === userBase[currentIndex].degree) {
+                    var _val = $txtUserKey.val();
+                    if (userBase[currentIndex].bit) {
+                        _val = _val + '1';
+                    } else {
+                        _val = _val + '0';
+                    }
+                   
+                    $txtUserKey.val(_val);
                     return true;
                 }
                 return false;

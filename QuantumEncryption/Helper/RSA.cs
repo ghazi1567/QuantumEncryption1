@@ -120,25 +120,50 @@ namespace QuantumEncryption.Helper
             return BigInteger.ModPow(integer, d, n);
         }
 
-        private static BigInteger GetPrimeNumber(BigInteger bigInteger)
+        private static Int64 GetPrimeNumber(Int64 aa)
         {
-            return bigInteger;
+            for (Int64 i = aa; i >= 0; i--)
+            {
+                if (IsPrime(i))
+                {
+                    return i;
+                }
+                
+            }
+            return aa;
         }
+        public static bool IsPrime(Int64 number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
 
+            var boundary = (Int64)Math.Floor(Math.Sqrt(number));
+
+            for (Int64 i = 3; i <= boundary; i += 2)
+                if (number % i == 0)
+                    return false;
+
+            return true;
+        }
         private  static void CalculatePrimeNumbers(string userKey)
         {
+            Int64 _bignum = 99999999999999997;
             int userKeyNumber = Convert.ToInt32(userKey, 2);
-            BigInteger userKeyBigInt = new BigInteger(userKeyNumber);
+            
 
 
-            BigInteger highestNumber = BigInteger.Add(p, userKeyBigInt);
-            p = GetPrimeNumber(highestNumber);
-            q= GetPrimeNumber(BigInteger.Subtract(highestNumber,BigInteger.One));
+            Int64 highestNumber = _bignum + userKeyNumber;
+            Int64 p1 = GetPrimeNumber(highestNumber);
+            p = new BigInteger(p1);
+            Int64 p2 = GetPrimeNumber(p1-1);
+            q = new BigInteger(p2);
         }
 
         public static string StartEncryption(string str,string UserKey)
         {
-            // CalculatePrimeNumbers(UserKey);
+            UserKey = "0011111";
+             CalculatePrimeNumbers(UserKey);
             //p = prime1;
             //q = prime2;
             n = n_value(p, q);

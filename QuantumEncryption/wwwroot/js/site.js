@@ -127,7 +127,7 @@ var quantumModule;
                 // ajax call here
                 $.ajax({
                     contentType: "application/json",
-                    url: 'https://localhost:44348/api/Common',
+                    url: 'https://quantumapi.azurewebsites.net/api/Common',
                     type: 'get'
                 }).done(function (response) { //
                     RequestBit(response);

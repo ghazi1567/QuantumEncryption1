@@ -53,7 +53,7 @@ namespace QuantumEncryption.Pages
             #endregion
 
             // Encryotion
-            var encryptesData = RSA.StartEncryption(fileContents,SessionModel.UserKey);
+            var encryptesData = RSA.StartEncryption(fileContents,SessionModel?.UserKey);
 
             #region Sending data to Receiver
             var userdata = new UserData

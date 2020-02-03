@@ -25,10 +25,10 @@ namespace QuantumEncryption.Pages
         public ActionResult OnGet()
         {
             SessionModel = Session.GetSessionModel(HttpContext.Session);
-            if (string.IsNullOrEmpty(SessionModel.UserKey) || string.IsNullOrEmpty(SessionModel.UserName))
-            {
-                return RedirectToPage("Login");
-            }
+            //if (string.IsNullOrEmpty(SessionModel.UserKey) || string.IsNullOrEmpty(SessionModel.UserName))
+            //{
+            //    return RedirectToPage("Login");
+            //}
             UserDatas = _appDbContext.UserDatas.Where(x=>x.SenderName == SessionModel.UserName).ToList();
             return Page();
         }

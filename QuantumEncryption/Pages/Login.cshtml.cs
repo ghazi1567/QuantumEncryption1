@@ -30,8 +30,12 @@ namespace QuantumEncryption.Pages
             HttpContext.Session.SetString("loggedUserKey", UserKey);
             return RedirectToPage("Send");
         }
+        public ActionResult OnGetLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("Login");
+        }
 
-        
     }
 
 }

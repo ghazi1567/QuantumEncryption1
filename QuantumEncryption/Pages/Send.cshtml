@@ -39,46 +39,79 @@
 <div class="container">
     @*<partial name="_CookieConsentPartial" />*@
     <main role="main" class="pb-3">
-        <form method="post" enctype="multipart/form-data">
 
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group ">
+                <label for="exampleFormControlSelect1">User</label>
+                <select class="form-control" id="cmb-user" name="ReceiverName" asp-for="ReceiverName" required>
+                    <option value="">select User</option>
+                    <option>ABC</option>
+                    <option>XYZ</option>
+                </select>
+            </div>
             <div class="input-group">
                 <div class="custom-file">
                     <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
                     <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" asp-page-handler="Encrypt" type="submit">Encrypt</button>
-                    <button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
+                    <button class="btn btn-outline-secondary" asp-page-handler="Encrypt" type="submit">Send</button>
+                    @*<button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>*@
                 </div>
             </div>
 
 
 
         </form>
+
+        <br />
+        <br />
+        <div class="row">
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Receiver</th>
+                        <th scope="col">Date time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UserDatas)
+                    {
+                        <tr>
+                            <th scope="row">@item.UserDataId</th>
+                            <td>@item.SenderName</td>
+                            <td>@item.ReceiverName</td>
+                            <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </main>
 </div>
 
 @section Scripts{
     <script>
-        var s = 22;
-        var r = 1;
-        var t = 2;
-        var i = 0;
-        var length = 0;
-        var result = new Array();
+      
 
-        function getBits(s, r, t, i) {
-            if (i > length) {
-                getFinalBit();
-                return;
-            }
+        function getUsers() {
+           
             // ajax call here
             $.ajax({
                 contentType: "application/json",
-                url: 'https://localhost:44348/api/Connect/' + s + '/' + r + '/' + t + '/' + i,
+                url: 'https://localhost:44348/api/Users',
                 type: 'get'
-            }).done(function (response) { //
-                RequestBit(response);
+            }).done(function (response) { 
+                var _options = '';
+                for (var i = 0; i < response.length; i++) {
+                    _options += '<option>'+ response[i].name +'</option>';
+                }
+                $("#cmb-user").append(_options);
+                console.log(response);
             }).fail(function (xhr, status, error) {
                 //Ajax request failed.
                 var errorMessage = xhr.status + ': ' + xhr.statusText
@@ -87,33 +120,7 @@
             })
 
         }
-
-        function getConnectUser() {
-            r = $("#cmb-user option:selected").val()
-            getBits(s, r, t, i);
-        }
-
-        function RequestBit(response) {
-            if (i == 0) {
-                var length = t * 10;
-                var count = response.bit;
-                if (count > length) {
-                    length = count;
-                }
-                i = i + 1;
-            } else {
-                result.push(response);
-                i = i + 1;
-                getBits(s, r, t, i)
-            }
-        }
-
-        function getFinalBit() {
-            for (var i = 0; i < length; i++) {
-                console.log(result[t * i]);
-            }
-        }
-
+       
     </script>
 
 }

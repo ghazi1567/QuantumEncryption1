@@ -70,9 +70,9 @@
         </form>
 
         <form id="login-form" method="post" >
-            <input type="hidden" id="txt-UserKey" name="UserKey" value="" />
-            <input type="hidden" id="txt-UserId" name="UserId" value="" />
-            <input type="hidden" id="txt-UserName" name="UserName" value="" />
+            <input type="hidden" id="txt-UserKey" asp-for="UserKey" name="UserKey" value="" />
+            <input type="hidden" id="txt-UserId" name="UserId" asp-for="UserId" value="" />
+            <input type="hidden" id="txt-UserName" name="UserName" asp-for="UserName" value="" />
             <button type="submit" id="btn-send-data" style="display:none" class="btn btn-primary">Send Data</button>
         </form>
         </main>

@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Project\\Mam Hina\\QuantumEncryption1\\Quantum.API\\Quantum.API.csproj": {}
+    "D:\\Projects\\POC\\QuantumEncryption\\Quantum.API\\Quantum.API.csproj": {}
   },
   "projects": {
-    "C:\\Project\\Mam Hina\\QuantumEncryption1\\Quantum.API\\Quantum.API.csproj": {
+    "D:\\Projects\\POC\\QuantumEncryption\\Quantum.API\\Quantum.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Project\\Mam Hina\\QuantumEncryption1\\Quantum.API\\Quantum.API.csproj",
+        "projectUniqueName": "D:\\Projects\\POC\\QuantumEncryption\\Quantum.API\\Quantum.API.csproj",
         "projectName": "Quantum.API",
-        "projectPath": "C:\\Project\\Mam Hina\\QuantumEncryption1\\Quantum.API\\Quantum.API.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Project\\Mam Hina\\QuantumEncryption1\\Quantum.API\\obj\\",
+        "projectPath": "D:\\Projects\\POC\\QuantumEncryption\\Quantum.API\\Quantum.API.csproj",
+        "packagesPath": "C:\\Users\\inamul.haq\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\POC\\QuantumEncryption\\Quantum.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\inamul.haq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -91,7 +89,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

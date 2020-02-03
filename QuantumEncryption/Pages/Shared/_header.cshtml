@@ -15,7 +15,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                     </li>
-                    @if (string.IsNullOrEmpty(Model.UserName) && string.IsNullOrEmpty(Model.UserKey))
+                    @if (string.IsNullOrEmpty(Model.UserName) || string.IsNullOrEmpty(Model.UserKey))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
@@ -31,6 +31,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Receive">Receive Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Login" asp-page-handler="Logout">Logout</a>
                         </li>
                     }
 

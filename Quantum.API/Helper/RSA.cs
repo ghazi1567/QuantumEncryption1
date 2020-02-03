@@ -121,7 +121,7 @@ namespace Quantum.API.Helper
                 var i = GetBigInteger(RSAKey.Exponent);
                 var p = GetBigInteger(RSAKey.Modulus);
 
-                RSAParameters RSAKey1 = getKey(173, 211);
+                RSAParameters RSAKey1 = getKey(4079, 4073);
                 RSACryptoService.ImportParameters(RSAKey1);
                 
                 byte[] Data = ByteConverter.GetBytes(txtplain);
@@ -404,22 +404,39 @@ namespace Quantum.API.Helper
             //    DQ = dq.ToByteArray(),
             //    InverseQ = inverseQ.ToByteArray(),
             //};
-            var aa = RecoverRSAParameters(n, e, d);
+            RSAParameters RSAKey = RSACryptoService.ExportParameters(true);
+
+            var pp = GetBigInteger(RSAKey.P);
+            var qq = GetBigInteger(RSAKey.Q); 
+            var nn = GetBigInteger(RSAKey.Modulus);
+            var ee = GetBigInteger(RSAKey.Exponent);
+            var dd = GetBigInteger(RSAKey.D);
+            var aa = RecoverRSAParameters(nn, ee, dd);
 
 
+            //var result = new RSAParameters
+            //{
+            //    Modulus = Convert.FromBase64String(n.ToString()),
+            //    Exponent = GetBytes(e, -1),
+            //    D = GetBytes(d, modLen),
+            //    P = GetBytes(p, halfModLen),
+            //    Q = GetBytes(q, halfModLen),
+            //    DP = GetBytes(dp, halfModLen),
+            //    DQ = GetBytes(dq, halfModLen),
+            //    InverseQ = GetBytes(inverseQ, halfModLen),
+            //};
             var result = new RSAParameters
             {
-                Modulus = GetBytes(n, modLen),
-                Exponent = GetBytes(e, -1),
-                D = GetBytes(d, modLen),
-                P = GetBytes(p, halfModLen),
-                Q = GetBytes(q, halfModLen),
-                DP = GetBytes(dp, halfModLen),
-                DQ = GetBytes(dq, halfModLen),
-                InverseQ = GetBytes(inverseQ, halfModLen),
+                Modulus = Encoding.UTF8.GetBytes(n.ToString()),
+                Exponent = Encoding.UTF8.GetBytes(e.ToString()),
+                D = Encoding.UTF8.GetBytes(d.ToString()),
+                P = Encoding.UTF8.GetBytes(p.ToString()),
+                Q = Encoding.UTF8.GetBytes(q.ToString()),
+                DP = Encoding.UTF8.GetBytes(dp.ToString()),
+                DQ = Encoding.UTF8.GetBytes(dq.ToString()),
+                InverseQ = Encoding.UTF8.GetBytes(inverseQ.ToString()),
             };
-
-            return aa;
+            return result;
         }
 
 
@@ -531,6 +548,7 @@ namespace Quantum.API.Helper
                 }
 
                 BigInteger p = BigInteger.GreatestCommonDivisor(y - BigInteger.One, n);
+             
                 BigInteger q = n / p;
                 BigInteger dp = d % (p - BigInteger.One);
                 BigInteger dq = d % (q - BigInteger.One);

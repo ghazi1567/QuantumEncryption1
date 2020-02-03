@@ -1,0 +1,119 @@
+﻿@page
+@model QuantumEncryption.Pages.SendModel
+@{
+    ViewData["Title"] = "Send";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+@*<div class="row">
+        <div class="col-md-6">
+            <div class="col-md-8">
+
+                <div class="form-group ">
+                    <label for="exampleFormControlSelect1">User</label>
+                    <select class="form-control" id="cmb-user" name="KeyLength" required>
+                        <option value="">select User</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <button type="button" id="btn-connect" class="btn btn-primary" onclick="getConnectUser();">Connect</button>
+            </div>
+
+        </div>
+
+
+    </div>*@
+    <partial name="_header" model="Model.SessionModel" />
+<div class="container">
+    @*<partial name="_CookieConsentPartial" />*@
+    <main role="main" class="pb-3">
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
+                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" asp-page-handler="Encrypt" type="submit">Encrypt</button>
+                    <button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
+                </div>
+            </div>
+
+
+
+        </form>
+    </main>
+</div>
+
+@section Scripts{
+    <script>
+        var s = 22;
+        var r = 1;
+        var t = 2;
+        var i = 0;
+        var length = 0;
+        var result = new Array();
+
+        function getBits(s, r, t, i) {
+            if (i > length) {
+                getFinalBit();
+                return;
+            }
+            // ajax call here
+            $.ajax({
+                contentType: "application/json",
+                url: 'https://localhost:44348/api/Connect/' + s + '/' + r + '/' + t + '/' + i,
+                type: 'get'
+            }).done(function (response) { //
+                RequestBit(response);
+            }).fail(function (xhr, status, error) {
+                //Ajax request failed.
+                var errorMessage = xhr.status + ': ' + xhr.statusText
+                //alert('Error - ' + errorMessage);
+
+            })
+
+        }
+
+        function getConnectUser() {
+            r = $("#cmb-user option:selected").val()
+            getBits(s, r, t, i);
+        }
+
+        function RequestBit(response) {
+            if (i == 0) {
+                var length = t * 10;
+                var count = response.bit;
+                if (count > length) {
+                    length = count;
+                }
+                i = i + 1;
+            } else {
+                result.push(response);
+                i = i + 1;
+                getBits(s, r, t, i)
+            }
+        }
+
+        function getFinalBit() {
+            for (var i = 0; i < length; i++) {
+                console.log(result[t * i]);
+            }
+        }
+
+    </script>
+
+}

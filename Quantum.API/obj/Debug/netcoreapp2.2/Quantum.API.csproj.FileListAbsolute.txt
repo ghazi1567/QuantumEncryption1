@@ -13,3 +13,19 @@ D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.AP
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorTargetAssemblyInfo.cache
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.dll
 D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.pdb
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.deps.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.runtimeconfig.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.runtimeconfig.dev.json
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.dll
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\bin\Debug\netcoreapp2.2\Quantum.API.pdb
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.csprojAssemblyReference.cache
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorAssemblyInfo.cache
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorAssemblyInfo.cs
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.AssemblyInfoInputs.cache
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.AssemblyInfo.cs
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorTargetAssemblyInfo.cache
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.dll
+C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.pdb

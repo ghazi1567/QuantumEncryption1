@@ -11,8 +11,8 @@ namespace QuantumEncryption.Helper
         {
             return new SessionModel
             {
-                UserKey = session.Get("loggedUserKey")?.ToString(),
-                UserName = session.Get("loggedUser")?.ToString(),
+                UserKey = session.GetString("loggedUserKey"),
+                UserName = session.GetString("loggedUser"),
             };
         }
     }

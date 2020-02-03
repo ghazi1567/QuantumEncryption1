@@ -39,22 +39,58 @@
 <div class="container">
     @*<partial name="_CookieConsentPartial" />*@
     <main role="main" class="pb-3">
-        <form method="post" enctype="multipart/form-data">
 
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group ">
+                <label for="exampleFormControlSelect1">User</label>
+                <select class="form-control" id="cmb-user" name="ReceiverName" asp-for="ReceiverName" required>
+                    <option value="">select User</option>
+                    <option>ABC</option>
+                    <option>XYZ</option>
+                </select>
+            </div>
             <div class="input-group">
                 <div class="custom-file">
                     <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
                     <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" asp-page-handler="Encrypt" type="submit">Encrypt</button>
-                    <button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
+                    <button class="btn btn-outline-secondary" asp-page-handler="Encrypt" type="submit">Send</button>
+                    @*<button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>*@
                 </div>
             </div>
 
 
 
         </form>
+
+        <br />
+        <br />
+        <div class="row">
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Receiver</th>
+                        <th scope="col">Date time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UserDatas)
+                    {
+                        <tr>
+                            <th scope="row">@item.UserDataId</th>
+                            <td>@item.SenderName</td>
+                            <td>@item.ReceiverName</td>
+                            <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </main>
 </div>
 

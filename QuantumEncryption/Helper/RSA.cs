@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace QuantumEncryption.Helper
     {
         static BigInteger p = 99999999999999997;//99991;
         static BigInteger q = 99999999999999977;//99989;
-        static BigInteger n = 0;
+        public static BigInteger n = 0;
         static BigInteger e = 0;
-        static BigInteger d = 0;
+        public static BigInteger d = 0;
          static BigInteger n_value(BigInteger prime1, BigInteger prime2)
         {
             return (prime1 * prime2);
@@ -119,8 +120,25 @@ namespace QuantumEncryption.Helper
             return BigInteger.ModPow(integer, d, n);
         }
 
-        public static string StartEncryption(string str,BigInteger prime1, BigInteger prime2)
+        private static BigInteger GetPrimeNumber(BigInteger bigInteger)
         {
+            return bigInteger;
+        }
+
+        private  static void CalculatePrimeNumbers(string userKey)
+        {
+            int userKeyNumber = Convert.ToInt32(userKey, 2);
+            BigInteger userKeyBigInt = new BigInteger(userKeyNumber);
+
+
+            BigInteger highestNumber = BigInteger.Add(p, userKeyBigInt);
+            p = GetPrimeNumber(highestNumber);
+            q= GetPrimeNumber(BigInteger.Subtract(highestNumber,BigInteger.One));
+        }
+
+        public static string StartEncryption(string str,string UserKey)
+        {
+            // CalculatePrimeNumbers(UserKey);
             //p = prime1;
             //q = prime2;
             n = n_value(p, q);

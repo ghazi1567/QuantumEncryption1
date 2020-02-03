@@ -29,3 +29,4 @@ C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quant
 C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.RazorTargetAssemblyInfo.cache
 C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.dll
 C:\Project\Mam Hina\QuantumEncryption1\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.pdb
+D:\Projects\POC\QuantumEncryption\Quantum.API\obj\Debug\netcoreapp2.2\Quantum.API.csprojAssemblyReference.cache

@@ -22,16 +22,12 @@ namespace QuantumEncryption.Pages
         public void OnGet()
         {
             SessionModel = Session.GetSessionModel(HttpContext.Session);
-           // string unencryptedString = "AZdddfgDSASDSA ASDASD ADASD ADSADSAD ADSADASD DASDSADASD hjgjhgjasdfgt";
-           // string encryptedString=RSA.StartEncryption(unencryptedString, 0, 0);
-           //string result =  RSA.StartDecryption(encryptedString);
         }
         public ActionResult OnPost()
         {
+            HttpContext.Session.SetString("loggedUserId", UserId);
             HttpContext.Session.SetString("loggedUser", UserName);
             HttpContext.Session.SetString("loggedUserKey", UserKey);
-            //HttpContext.Session.SetString("connectedUser", "1");
-            //HttpContext.Session.SetString("connectedUserKey", "1");
             return RedirectToPage("Send");
         }
 

@@ -14,5 +14,9 @@ namespace QuantumEncryption.Contexts
         }
 
         public DbSet<UserData> UserDatas { get; set; }
+        public DbSet<LoggedInUser> LoggedInUsers { get; set; }
+        public DbSet<KeyRequest> KeyRequests { get; set; }
+        
+
     }
 }

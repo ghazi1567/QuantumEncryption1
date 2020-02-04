@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using QuantumEncryption.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -160,6 +161,21 @@ namespace QuantumEncryption.Helper
             q = new BigInteger(p2);
         }
 
+        public static Key GetPublicKey(string userKey)
+        {
+            CalculatePrimeNumbers(userKey);
+            n = n_value(p, q);
+            BigInteger n_phi = cal_phi(p, q);
+            e = e_value(p, q);
+            d = cal_privateKey(n_phi, e);
+       
+            return new Key
+            {
+                PublicKey = $"{e}, {n}",
+                PrivateKey  = $"{d}, {n}",
+            };
+        }
+
         public static string StartEncryption(string str,string UserKey)
         {
             UserKey = "0011111";
@@ -209,5 +225,8 @@ namespace QuantumEncryption.Helper
             return Enumerable.Range(0, str.Length / chunkSize)
                 .Select(i => str.Substring(i * chunkSize, chunkSize));
         }
+
+
+
     }
 }

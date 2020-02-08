@@ -121,7 +121,7 @@ namespace QuantumEncryption.Helper
             return BigInteger.ModPow(integer, d, n);
         }
 
-        private static Int64 GetPrimeNumber(Int64 aa)
+        public static Int64 GetPrimeNumber(Int64 aa)
         {
             for (Int64 i = aa; i >= 0; i--)
             {

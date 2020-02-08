@@ -1,46 +1,30 @@
 ﻿@page "{id:int}"
-@model QuantumEncryption.Pages.SendModel
+@model QuantumEncryption.Pages.ReceiveModel
 @{
-    ViewData["Title"] = "Send";
+    ViewData["Title"] = "Receive";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-
 <partial name="_header" model="Model.SessionModel" />
 <div class="container">
 
     <main role="main" class="pb-3">
-        <div id="msg" >
-            
+        <div id="msg">
+
         </div>
-        
+
         <form method="post" enctype="multipart/form-data">
-            <div class="form-group ">
-                <label for="exampleFormControlSelect1"></label>
-                <select class="form-control col-md-11" id="cmb-user" name="ReceiverId" required>
-                    <option value="0">select User</option>
-
-                    @foreach (var item in Model.LoggedInUsers)
-                    {
-                        <option value="@item.LoggedInUserId">@item.UserName</option>
-                    }
-                </select>
-                <button class="btn btn-success" onclick="getUserKey();" type="button">Connect</button>
-            </div>
-
+            
             <div class="form-group">
                 <div class="custom-file">
-                    <input type="hidden" asp-for="ReceiverName" id="ReceiverName" class="custom-file-input">
-                    <input type="hidden" asp-for="SenderName" id="SenderName" class="custom-file-input">
-                    <input type="hidden" asp-for="ReceiverKey" id="ReceiverKey" class="custom-file-input" required>
                     <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
                     <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                 </div>
-
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
+                </div>
             </div>
 
-            <div class="input-group-append">
-                <button class="btn btn-primary" id="btn-submit" title="Connect user" disabled asp-page-handler="Encrypt" type="submit">Send Data</button>
-            </div>
+
 
         </form>
 
@@ -56,17 +40,19 @@
                         <th scope="col">Sender</th>
                         <th scope="col">Receiver</th>
                         <th scope="col">Date time</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.UserDatas)
                     {
-                        <tr>
-                            <th scope="row">@item.UserDataId</th>
-                            <td>@item.SenderName</td>
-                            <td>@item.ReceiverName</td>
-                            <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
-                        </tr>
+                    <tr>
+                        <th scope="row">@item.UserDataId</th>
+                        <td>@item.SenderName</td>
+                        <td>@item.ReceiverName</td>
+                        <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
+                        <td><a href="@item.UserDataId?handler=download">Download</a></td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -92,7 +78,6 @@
             }).done(function (response) {
                 console.log(response);
                 $('#ReceiverKey').val(response);
-                $('#btn-submit').removeAttr('disabled');
                 showAlert('Connected!.', 'success');
             }).fail(function (xhr, status, error) {
                 //Ajax request failed.

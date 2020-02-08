@@ -107,7 +107,7 @@ namespace QuantumEncryption.Helper
             //      }
 
         }
-        static BigInteger Encrypted_Number(BigInteger integer)
+        static BigInteger Encrypted_Number(BigInteger integer, BigInteger e, BigInteger n)
         {
             if (integer < n)
             {
@@ -116,7 +116,7 @@ namespace QuantumEncryption.Helper
             throw new Exception("The integer must be less than the value of n in order to be decypherable!");
         }
 
-        static BigInteger Decrypt_Number(BigInteger integer)
+        static BigInteger Decrypt_Number(BigInteger integer, BigInteger d, BigInteger n)
         {
             return BigInteger.ModPow(integer, d, n);
         }
@@ -171,43 +171,35 @@ namespace QuantumEncryption.Helper
        
             return new Key
             {
-                PublicKey = $"{e}, {n}",
-                PrivateKey  = $"{d}, {n}",
+                PublicKey = $"{e},{n}",
+                PrivateKey  = $"{d},{n}",
             };
         }
 
-        public static string StartEncryption(string str,string UserKey)
+
+
+        public static string StartEncryption(string str,string publicKey)
         {
-            UserKey = "0011111";
-             CalculatePrimeNumbers(UserKey);
-            //p = prime1;
-            //q = prime2;
-            n = n_value(p, q);
-            BigInteger n_phi = cal_phi(p, q);
-            e = e_value(p, q);
-            d = cal_privateKey(n_phi, e);
+            string[] arr = publicKey.Split(',');
+
             StringBuilder sb = new StringBuilder();
             foreach (var item in Split(str,10))
             {
-                sb.Append($"{Encrypted_Number(new BigInteger(Encoding.UTF8.GetBytes(item)))}|");
+                sb.Append($"{Encrypted_Number(new BigInteger(Encoding.UTF8.GetBytes(item)),BigInteger.Parse(arr[0]), BigInteger.Parse(arr[1]))}|");
             }
             return sb.ToString();
         }
-        public static string StartDecryption(string str)
+        public static string StartDecryption(string str,string privateKey)
         {
-            //p = prime1;
-            //q = prime2;
-            n = n_value(p, q);
-            BigInteger n_phi = cal_phi(p, q);
-            e = e_value(p, q);
-            d = cal_privateKey(n_phi, e);
+            string[] arr = privateKey.Split(',');
+
             StringBuilder sb = new StringBuilder();
             foreach (var item in str.Split('|'))
             {
                 if (!string.IsNullOrEmpty(item))
                 {
                     BigInteger a = BigInteger.Parse(item);
-                    BigInteger decryptedInteger2 = Decrypt_Number(a);
+                    BigInteger decryptedInteger2 = Decrypt_Number(a,BigInteger.Parse(arr[0]), BigInteger.Parse(arr[1]));
                     string decryptedIntegerAsString = Encoding.UTF8.GetString(decryptedInteger2.ToByteArray());
                     sb.Append($"{decryptedIntegerAsString}");
                 }

@@ -23,6 +23,7 @@ namespace QuantumEncryption
             
             return new SessionModel
             {
+                Id =user == null ?0 : user.LoggedInUserId,
                 UserKey = user?.UserKey,
                 UserName = user?.UserName,
             };

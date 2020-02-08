@@ -14,11 +14,11 @@ using QuantumEncryption.Services;
 
 namespace QuantumEncryption.Pages
 {
-    public class SendModel : PageModel
+    public class ReceiveModel : PageModel
     {
         private readonly ISessionService _service;
         private readonly AppDbContext _appDbContext;
-        public SendModel(ISessionService context, AppDbContext appDbContext)
+        public ReceiveModel(ISessionService context, AppDbContext appDbContext)
         {
             _service = context;
             _appDbContext = appDbContext;
@@ -26,6 +26,9 @@ namespace QuantumEncryption.Pages
         public List<LoggedInUser> LoggedInUsers { get; set; }
         public List<UserData> UserDatas { get; set; }
         public SessionModel SessionModel { get; set; }
+        [BindProperty]
+        public IFormFile File { get; set; }
+
         public ActionResult OnGet(int Id)
         {
             SessionModel = _service.GetCurrentUser(Id);
@@ -33,22 +36,13 @@ namespace QuantumEncryption.Pages
             {
                 return RedirectToPage("Login");
             }
-            SenderName = SessionModel.UserName;
-            UserDatas = _appDbContext.UserDatas.Where(x=>x.SenderName == SessionModel.UserName).ToList();
-            LoggedInUsers = _service.GetLoggedInUsers(Id);
+            UserDatas = _appDbContext.UserDatas.Where(x => x.ReceiverName == SessionModel.UserName).ToList();
+
             return Page();
         }
-        [BindProperty]
-        public IFormFile File { get; set; }
-        [BindProperty]
-        public string ReceiverName { get; set; }
-        [BindProperty]
-        public string ReceiverKey { get; set; }
-        [BindProperty]
-        public string SenderName { get; set; }
-        public async Task<FileResult> OnPostEncryptAsync()
+
+        public async Task<FileResult> OnPostDecryptAsync(int Id)
         {
-            #region ReadFileContent
             var filePath = Path.GetTempFileName();
             //var result ="";
             string fileContents;
@@ -60,31 +54,14 @@ namespace QuantumEncryption.Pages
             {
                 fileContents = reader.ReadToEnd();
             }
-            #endregion
-
-            // Encryotion
-            var encryptesData = RSA.StartEncryption(fileContents,ReceiverKey);
-
-            #region Sending data to Receiver
-            var userdata = new UserData
-            {
-                SenderName = SenderName,
-                ReceiverName = ReceiverName,
-                SenderPublicKey = $"{RSA.d},{RSA.n}",
-                EncryptedData = encryptesData,
-                SendingDatetime=DateTime.Now
-            };
-            _appDbContext.UserDatas.Add(userdata);
-            _appDbContext.SaveChanges();
-            #endregion
-
-
-            return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");
+            var user = await _appDbContext.LoggedInUsers.FindAsync(Id);
+            return File(Encoding.UTF8.GetBytes(RSA.StartDecryption(fileContents,user.UserPrivateKey)), "text/plain", "DecryptedText.txt");
         }
-        
-        public JsonResult OnGetConnect(int Id)
+        public ActionResult OnGetDownload(int Id)
         {
-            return new JsonResult(_service.RequestPublicKey(Id));
+            
+            var data = _appDbContext.UserDatas.Find(Id);
+            return File(Encoding.UTF8.GetBytes(data.EncryptedData), "text/plain", "EcryptedText.txt");
         }
     }
 }

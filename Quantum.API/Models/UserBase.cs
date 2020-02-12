@@ -10,7 +10,8 @@ namespace Quantum.API.Models
     {
         public int UserBaseId { get; set; }
         public int Degree { get; set; }
-        public bool Bit { get; set; }
+        public int Sin { get; set; }
+        public int Cos { get; set; }
 
         public int UserId { get; set; }
     }

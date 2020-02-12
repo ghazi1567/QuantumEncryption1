@@ -21,7 +21,7 @@ namespace Quantum.API.Controllers
         {
             _context = context;
         }
-        public static List<int> baseList { get; set; } = new List<int>() { 0,45,90,135};
+        public static List<int> baseList { get; set; } = new List<int>() { 0,45,90,135,180,225,265};
         static Random rnd = new Random();
         // GET api/values
         [HttpGet("Common")]

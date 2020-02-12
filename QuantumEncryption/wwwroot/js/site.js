@@ -143,12 +143,7 @@ var quantumModule;
             function isMatched(bit) {
                 if (bit === userBase[currentIndex].degree) {
                     var _val = $txtUserKey.val();
-                    if (userBase[currentIndex].bit) {
-                        _val = _val + '1';
-                    } else {
-                        _val = _val + '0';
-                    }
-                   
+                    _val = userBase[currentIndex].sin +','+ userBase[currentIndex].cos;
                     $txtUserKey.val(_val);
                     return true;
                 }

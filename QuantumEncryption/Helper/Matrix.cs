@@ -1,37 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using QuantumEncryption.Helper;
 
-namespace QuantumEncryption.Pages
+namespace QuantumEncryption.Helper
 {
-    public class ConnectModel : PageModel
+    public static class Matrix
     {
-        public void OnGet()
-        {
-
-        }
-        public JsonResult OnGetMatrix()
-        {
-            //return new JsonResult(getMatrix(45,315));
-            // return new JsonResult(getRandomMatrix());
-            var _val = Math.Round(Determinant(MatrixMultiply(45,315)), 3);
-
-            string decimal_places = "";
-            var regex = new System.Text.RegularExpressions.Regex("(?<=[\\.])[0-9]+");
-            if (regex.IsMatch(_val.ToString()))
-            {
-                decimal_places = regex.Match(_val.ToString()).Value;
-            }
-            var bigNumber = Int64.Parse(decimal_places);
-            return new JsonResult(KeyGenerator.GetKey(bigNumber));
-        }
-
         static double getAngle(double degrees)
         {
             double angle = Math.PI * degrees / 180.0;
@@ -71,10 +46,9 @@ namespace QuantumEncryption.Pages
             myArray[3, 1] = RSA.GetPrimeNumber(rnd); rnd = rnd - 5;
             myArray[3, 2] = RSA.GetPrimeNumber(rnd); rnd = rnd - 5;
             myArray[3, 3] = RSA.GetPrimeNumber(rnd); rnd = rnd - 5;
-            
+
             return myArray;
         }
-
         static double[,] MatrixMultiply(double sinDegre, double cosDegree)
         {
             var a = getMatrix(sinDegre,cosDegree);
@@ -106,11 +80,11 @@ namespace QuantumEncryption.Pages
                     double[,] Temp = CreateSmallerMatrix(input, 0, j);
                     value = Math.Round(value, 2) + Math.Round(input[0, j], 2) * (SignOfElement(0, j) * Determinant(Temp));
                 }
-                return Math.Round(value,2);
+                return Math.Round(value, 2);
             }
             else if (order == 2)
             {
-                return Math.Round((Math.Round(input[0, 0], 2) * Math.Round(input[1,1], 2)) - (Math.Round(input[1, 0], 2) * Math.Round(input[0, 1], 2)), 2);
+                return Math.Round((Math.Round(input[0, 0], 2) * Math.Round(input[1, 1], 2)) - (Math.Round(input[1, 0], 2) * Math.Round(input[0, 1], 2)), 2);
             }
             else
             {
@@ -158,5 +132,18 @@ namespace QuantumEncryption.Pages
         }
 
 
+       public  static Int64 GetDeterminant(double sinDegre, double cosDegree)
+        {  // return new JsonResult(getRandomMatrix());
+            var _val = Determinant(MatrixMultiply(sinDegre, cosDegree));
+
+            string decimal_places = "";
+            var regex = new System.Text.RegularExpressions.Regex("(?<=[\\.])[0-9]+");
+            if (regex.IsMatch(_val.ToString()))
+            {
+                decimal_places = regex.Match(_val.ToString()).Value;
+            }
+            var bigNumber = Int64.Parse(decimal_places);
+            return bigNumber;
+        }
     }
 }

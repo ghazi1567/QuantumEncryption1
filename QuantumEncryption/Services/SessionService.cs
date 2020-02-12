@@ -36,13 +36,14 @@ namespace QuantumEncryption
 
         public LoggedInUser LoggedInUser(LoggedInUser user)
         {
-            Key key = RSA.GetPublicKey(user.UserKey);
+            var arr = user.UserKey.Split(',');
+            var determinant=  Matrix.GetDeterminant(double.Parse(arr[0]), double.Parse(arr[1]));
+            Key key = KeyGenerator.GetKey(determinant);
             user.UserPrivateKey = key.PrivateKey;
             user.UserPublicKey = key.PublicKey;
             _context.LoggedInUsers.Add(user);
             _context.SaveChanges();
 
-            
             return user;
         }
         public void LogoutCurrentUser(int sessionId)

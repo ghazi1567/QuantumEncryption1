@@ -150,6 +150,8 @@ namespace QuantumEncryption.Helper
             {
                 PublicKey = $"{e},{n}",
                 PrivateKey = $"{d},{n}",
+               P = $"{p}",
+                Q = $"{q}"
             };
         }
 

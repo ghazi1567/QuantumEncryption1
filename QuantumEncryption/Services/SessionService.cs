@@ -20,12 +20,21 @@ namespace QuantumEncryption
         public SessionModel GetCurrentUser(int sessionId)
         {
             var user = _context.LoggedInUsers.Find(sessionId);
-            
+            if (user == null)
+            {
+                user = new LoggedInUser();
+            }
             return new SessionModel
             {
                 Id =user == null ?0 : user.LoggedInUserId,
                 UserKey = user?.UserKey,
                 UserName = user?.UserName,
+                Decimal=user.Decimal,
+                Binary=user.Binary,
+                Q=user.Q,
+                P=user.P,
+                UserPrivateKey=user.UserPrivateKey,
+                UserPublicKey=user.UserPublicKey
             };
         }
 
@@ -41,6 +50,11 @@ namespace QuantumEncryption
             Key key = KeyGenerator.GetKey(determinant);
             user.UserPrivateKey = key.PrivateKey;
             user.UserPublicKey = key.PublicKey;
+            user.P = key.P;
+            user.Q = key.Q;
+            user.Binary = key.Binary;
+            user.Decimal = key.Decimal;
+
             _context.LoggedInUsers.Add(user);
             _context.SaveChanges();
 

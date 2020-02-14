@@ -27,17 +27,18 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Send" asp-route-id="@Model.Id" >Send Data</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/RSAKey" asp-route-id="@Model.Id">Key Detail</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Receive" asp-route-id="@Model.Id">Receive Data</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Send" asp-route-id="@Model.Id">Encryption</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Receive" asp-route-id="@Model.Id">Decryption</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login" asp-route-id="@Model.Id" asp-page-handler="Logout">Logout</a>
                         </li>
                     }
-
-
                 </ul>
             </div>
         </div>

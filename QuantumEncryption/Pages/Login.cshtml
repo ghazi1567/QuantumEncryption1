@@ -17,33 +17,48 @@
 <partial name="_header" model="Model.SessionModel"/>
 <div class="container">
     <main role="main" class="pb-3">
-        <form id="login-form" method="post" action="https://quantumapi.azurewebsites.net/api/Users/Login">
-            <div class="row">
+
+        <div class="panel panel-primary" id="login-div">
+            <div class="panel-heading text-center">Login</div>
+            <div class="panel-body">
+                <form id="login-form" method="post" action="https://quantumapi.azurewebsites.net/api/Users/Login">
+                    <div class="row">
 
 
-                <div class="col-md-6" id="login-div">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" placeholder="Enter Name" required>
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" placeholder="Enter Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">CNIC</label>
+                                <input type="text" class="form-control" name="CNIC" placeholder="CNIC" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+                            </div>
+
+                            <button type="submit" id="btn-login" class="btn btn-primary">Login</button>
+                        </div>
+
+
+
+
+
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">CNIC</label>
-                        <input type="text" class="form-control" name="CNIC" placeholder="CNIC" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="Password" placeholder="Password" required>
-                    </div>
 
-                    <button type="submit" id="btn-login" class="btn btn-primary">Login</button>
-                </div>
-
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary" id="base-div" style="display:none">
+            <div class="panel-heading text-center">CIA BASES</div>
+            <div class="panel-body">
                 <div class="col-md-6">
-                    <button type="submit" id="btn-key-request" style="display:none" class="btn btn-primary">Request For Key</button>
+                    @*<button type="submit" id="btn-key-request" style="display:none" class="btn btn-primary">Request For Key</button>*@
 
-                    <div id="base-div" style="display:none">
-
-
+                    <div>
                         <label for="exampleInputEmail1">Bases From CIA</label>
                         <div class="well well-large" id="cia-base-div">
                             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
@@ -54,26 +69,24 @@
                             <span class="glyphicon glyphicon-arrow-right" style="transform: rotate(-45deg);" aria-hidden="true"></span>
 
                         </div>
-                        <label for="exampleInputEmail1">Confirmed Bases</label>
+                        <label for="exampleInputEmail1">Confirmed Bases/ Matched Bases</label>
                         <table class="table table-bordered" id="tbl-user-bases">
                             <thead>
 
                             </thead>
                         </table>
                     </div>
+                    <form id="login-form" method="post">
+                        <input type="hidden" id="txt-UserKey" asp-for="UserKey" name="UserKey" value="" />
+                        <input type="hidden" id="txt-UserId" name="UserId" asp-for="UserId" value="" />
+                        <input type="hidden" id="txt-UserName" name="UserName" asp-for="UserName" value="" />
+                        <button type="submit" id="btn-send-data" style="display:none" class="btn btn-primary">Generate RSA Key</button>
+                    </form>
                 </div>
-
-
-
+                
             </div>
-
-        </form>
-
-        <form id="login-form" method="post" >
-            <input type="hidden" id="txt-UserKey" asp-for="UserKey" name="UserKey" value="" />
-            <input type="hidden" id="txt-UserId" name="UserId" asp-for="UserId" value="" />
-            <input type="hidden" id="txt-UserName" name="UserName" asp-for="UserName" value="" />
-            <button type="submit" id="btn-send-data" style="display:none" class="btn btn-primary">Send Data</button>
-        </form>
-        </main>
+        </div>
+      
+       
+    </main>
 </div>

@@ -21,5 +21,11 @@ namespace QuantumEncryption.Helper
         public int Id { get; set; }
         public string UserName { get; set; }
         public string UserKey { get; set; }
+        public string UserPrivateKey { get; set; }
+        public string UserPublicKey { get; set; }
+        public string P { get; set; }
+        public string Q { get; set; }
+        public string Binary { get; set; }
+        public string Decimal { get; set; }
     }
 }

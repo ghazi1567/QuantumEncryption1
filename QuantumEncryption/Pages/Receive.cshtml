@@ -11,53 +11,68 @@
         <div id="msg">
 
         </div>
+        <div class="panel panel-primary" >
+            <div class="panel-heading text-center">Decrypt</div>
+            <div class="panel-body">
 
-        <form method="post" enctype="multipart/form-data">
-            
-            <div class="form-group">
-                <div class="custom-file">
-                    <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
-                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
-                </div>
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
+                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                        </div>
+                        <div class="form-group float-right">
+                            <br />
+                            <button class="btn btn-primary" asp-page-handler="Decrypt" type="submit">Decrypt</button>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
             </div>
-
-
-
-        </form>
-
+        </div>
+       
         <br />
         <br />
         <div class="row">
 
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">Received Data</div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Sender</th>
+                                    <th scope="col">Receiver</th>
+                                    <th scope="col">Date time</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.UserDatas)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.UserDataId</th>
+                                        <td>@item.SenderName</td>
+                                        <td>@item.ReceiverName</td>
+                                        <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
+                                        <td><a href="@item.UserDataId?handler=download">Download</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Sender</th>
-                        <th scope="col">Receiver</th>
-                        <th scope="col">Date time</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.UserDatas)
-                    {
-                    <tr>
-                        <th scope="row">@item.UserDataId</th>
-                        <td>@item.SenderName</td>
-                        <td>@item.ReceiverName</td>
-                        <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
-                        <td><a href="@item.UserDataId?handler=download">Download</a></td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </main>
+                    </div>
+                </div>
+            </div>
+                
+            </div>
+</main>
 </div>
 @section Scripts{
     <script>

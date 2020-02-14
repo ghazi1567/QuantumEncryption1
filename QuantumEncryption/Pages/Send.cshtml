@@ -12,67 +12,89 @@
         <div id="msg" >
             
         </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">Encrypt</div>
+            <div class="panel-body">
+
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        <label></label>
+                        <select class="form-control col-md-12" id="cmb-user" onchange="getUserKey();" name="ReceiverId" required>
+                            <option value="0">select User</option>
+
+                            @foreach (var item in Model.LoggedInUsers)
+                            {
+                                <option value="@item.LoggedInUserId">@item.UserName</option>
+                            }
+                        </select>
+                        @*<button class="btn btn-success" onclick="getUserKey();" type="button">Connect</button>*@
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="hidden" asp-for="ReceiverName" id="ReceiverName" class="custom-file-input">
+                            <input type="hidden" asp-for="SenderName" id="SenderName" class="custom-file-input">
+                            <input type="hidden" asp-for="ReceiverKey" id="ReceiverKey" class="custom-file-input" required>
+                            <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
+                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                        </div>
+
+                    </div>
+                  
+                    <div class="form-group float-right">
+                        <br />
+                        <button class="btn btn-primary" id="btn-submit" title="Connect user" disabled asp-page-handler="Encrypt" type="submit">Encrypt</button>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
         
-        <form method="post" enctype="multipart/form-data">
-            <div class="form-group ">
-                <label for="exampleFormControlSelect1"></label>
-                <select class="form-control col-md-11" id="cmb-user" name="ReceiverId" required>
-                    <option value="0">select User</option>
-
-                    @foreach (var item in Model.LoggedInUsers)
-                    {
-                        <option value="@item.LoggedInUserId">@item.UserName</option>
-                    }
-                </select>
-                <button class="btn btn-success" onclick="getUserKey();" type="button">Connect</button>
-            </div>
-
-            <div class="form-group">
-                <div class="custom-file">
-                    <input type="hidden" asp-for="ReceiverName" id="ReceiverName" class="custom-file-input">
-                    <input type="hidden" asp-for="SenderName" id="SenderName" class="custom-file-input">
-                    <input type="hidden" asp-for="ReceiverKey" id="ReceiverKey" class="custom-file-input" required>
-                    <input type="file" asp-for="File" class="custom-file-input" id="inputGroupFile04" required>
-                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                </div>
-
-            </div>
-
-            <div class="input-group-append">
-                <button class="btn btn-primary" id="btn-submit" title="Connect user" disabled asp-page-handler="Encrypt" type="submit">Send Data</button>
-            </div>
-
-        </form>
 
         <br />
         <br />
         <div class="row">
+            <div class="col-md-12">
 
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Sender</th>
-                        <th scope="col">Receiver</th>
-                        <th scope="col">Date time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.UserDatas)
-                    {
-                        <tr>
-                            <th scope="row">@item.UserDataId</th>
-                            <td>@item.SenderName</td>
-                            <td>@item.ReceiverName</td>
-                            <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">Sent Data</div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Sender</th>
+                                    <th scope="col">Receiver</th>
+                                    <th scope="col">Date time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.UserDatas)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.UserDataId</th>
+                                        <td>@item.SenderName</td>
+                                        <td>@item.ReceiverName</td>
+                                        <td>@item.SendingDatetime.ToString("yy-MMM-dd")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </div>
+@*<div class="panel panel-primary" id="base-div" style="display:none">
+    <div class="panel-heading text-center">CIA BASES</div>
+    <div class="panel-body">
+
+
+    </div>
+</div>*@
+
 @section Scripts{
     <script>
 

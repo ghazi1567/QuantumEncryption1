@@ -20,81 +20,94 @@
         <form id="register-form" method="post" action="https://quantumapi.azurewebsites.net/api/Users">
             <div class="row">
 
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" placeholder="Enter Name" required>
+                <div class="col-md-12">
+                    <div class="panel panel-primary"><div class="panel-heading">Register</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" class="form-control" name="Name" aria-describedby="emailHelp" placeholder="Enter Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Email</label>
+                                <input type="email" class="form-control" name="Email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">CNIC</label>
-                        <input type="text" class="form-control" name="CNIC" placeholder="CNIC" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="Password" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Key Length</label>
-                        <select class="form-control" id="Key" name="KeyLength" onchange="keyChange()" required>
-                            <option value="">select key length</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="agree" id="exampleCheck1" required>
-                        <label class="form-check-label" for="exampleCheck1">Check you have provide the correct information it would be use for communication over the network</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                  
                 </div>
-                <div class="col-md-6">
-                    <label for="exampleInputEmail1">Select Bases</label>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><button type="button" class="btn btn-primary" onclick="BaseSelection(0,0)">0 &#xb0;</button></td>
-                                <td><button type="button" class="btn btn-primary" onclick="BaseSelection(45,0)">45 &#xb0;</button></td>
-                                <td><button type="button" class="btn btn-primary" onclick="BaseSelection(90,1)">90 &#xb0;</button></td>
-                                <td><button type="button" class="btn btn-primary" onclick="BaseSelection(135,1)">135 &#xb0;</button></td>
-                            </tr>
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">CIA BASES</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Key Length</label>
+                                <select class="form-control" id="Key" name="KeyLength" onchange="keyChange()" required>
+                                    <option value="">select key length</option>
+                                    <option>1</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                </select>
+                            </div>
+                            <label for="exampleInputEmail1">Select Bases</label>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                                        <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                                        <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                                        <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(0,0)">0 &#xb0;</button></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(45,0)">45 &#xb0;</button></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(90,1)">90 &#xb0;</button></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="BaseSelection(135,1)">135 &#xb0;</button></td>
+                                    </tr>
 
-                        </tbody>
-                    </table>
-                    <label for="exampleInputEmail1">Selected Bases</label>
-                    <a href="javascript:void(0);" onclick="ResetBases();">Reset</a>
-                    <table class="table table-bordered" id="selectedBases">
-                        <tbody>
-                            @*<tr>
-                                    <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                    <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                    <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                    <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
-                                </tr>
-                                <tr>
-                                    <td>0 &#xb0;</td>
-                                    <td>0 &#xb0;</td>
-                                    <td>0 &#xb0;</td>
-                                    <td>0 &#xb0;</td>
-                                </tr>*@
+                                </tbody>
+                            </table>
+                            <label for="exampleInputEmail1">Selected Bases</label>
+                            <a href="javascript:void(0);" onclick="ResetBases();">Reset</a>
+                            <table class="table table-bordered" id="selectedBases">
+                                <tbody>
+                                    @*
+                <tr>
+                    <th scope="col"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                    <th scope="col"><span style="transform: rotate(-45deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                    <th scope="col"><span style="transform: rotate(-90deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                    <th scope="col"><span style="transform: rotate(-135deg);" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></th>
+                </tr>
+                <tr>
+                    <td>0 &#xb0;</td>
+                    <td>0 &#xb0;</td>
+                    <td>0 &#xb0;</td>
+                    <td>0 &#xb0;</td>
+                </tr>
+                                    *@
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="agree" id="exampleCheck1" required>
+                                <label class="form-check-label" for="exampleCheck1">Check you have provide the correct information it would be use for communication over the network</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary float-right">Register</button>
+                        </div>
+                    </div>
+                  
                 </div>
 
 
@@ -165,6 +178,10 @@
                 function BaseSelection(value, bit) {
                     if (col == 0) {
                         alert('Please select key length');
+                        return;
+                    }
+                    if (selectedBase.length == col) {
+                        $('table .btn.btn-primary').attr('disabled', 'true');
                         return;
                     }
                     var obj = {

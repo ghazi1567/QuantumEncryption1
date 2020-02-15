@@ -12,7 +12,7 @@ namespace Quantum.API.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public string CNIC { get; set; }
+        public string Email { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]

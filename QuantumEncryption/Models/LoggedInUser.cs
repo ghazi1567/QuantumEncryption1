@@ -14,5 +14,9 @@ namespace QuantumEncryption.Models
         public string SessionId { get; set; }
         public string UserPrivateKey { get; set; }
         public string UserPublicKey { get; set; }
+        public string P { get; set; }
+        public string Q { get; set; }
+        public string Binary { get; set; }
+        public string Decimal { get; set; }
     }
 }

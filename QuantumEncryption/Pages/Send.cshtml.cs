@@ -28,16 +28,18 @@ namespace QuantumEncryption.Pages
         public SessionModel SessionModel { get; set; }
         public ActionResult OnGet(int Id)
         {
-            SessionModel = _service.GetCurrentUser(Id);
+            setSessionData(Id);
             if (string.IsNullOrEmpty(SessionModel.UserKey) || string.IsNullOrEmpty(SessionModel.UserName))
             {
                 return RedirectToPage("Login");
             }
-            SenderName = SessionModel.UserName;
-            UserDatas = _appDbContext.UserDatas.Where(x=>x.SenderName == SessionModel.UserName).ToList();
-            LoggedInUsers = _service.GetLoggedInUsers(Id);
+            
             return Page();
         }
+        [BindProperty]
+        public string Text { get; set; }
+        [BindProperty]
+        public string Result { get; set; }
         [BindProperty]
         public IFormFile File { get; set; }
         [BindProperty]
@@ -46,9 +48,10 @@ namespace QuantumEncryption.Pages
         public string ReceiverKey { get; set; }
         [BindProperty]
         public string SenderName { get; set; }
-        public async Task<FileResult> OnPostEncryptAsync()
+        public async Task<ActionResult> OnPostEncryptAsync(int Id)
         {
             #region ReadFileContent
+            setSessionData(Id);
             var filePath = Path.GetTempFileName();
             //var result ="";
             string fileContents;
@@ -77,14 +80,24 @@ namespace QuantumEncryption.Pages
             _appDbContext.UserDatas.Add(userdata);
             _appDbContext.SaveChanges();
             #endregion
+            ViewData["result"] = encryptesData;
+            return Page();
 
-
-            return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");
+            //return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");
         }
         
         public JsonResult OnGetConnect(int Id)
         {
             return new JsonResult(_service.RequestPublicKey(Id));
+        }
+
+
+        private void setSessionData(int Id)
+        {
+            SessionModel = _service.GetCurrentUser(Id);
+            SenderName = SessionModel.UserName;
+            UserDatas = _appDbContext.UserDatas.Where(x => x.SenderName == SessionModel.UserName).ToList();
+            LoggedInUsers = _service.GetLoggedInUsers(Id);
         }
     }
 }

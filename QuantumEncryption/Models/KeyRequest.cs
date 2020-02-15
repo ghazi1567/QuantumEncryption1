@@ -19,6 +19,10 @@ namespace QuantumEncryption.Models
 
     public class Key
     {
+        public string Binary { get; set; }
+        public string Decimal { get; set; }
+        public string P { get; set; }
+        public string Q { get; set; }
         public string PublicKey { get; set; }
         public string PrivateKey { get; set; }
     }

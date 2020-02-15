@@ -69,7 +69,8 @@ var quantumModule;
                 
                 $divLogin.hide();
                 userBase = obj.userBases;
-
+                $divBase.show();
+                getQKBit();
               
 
 

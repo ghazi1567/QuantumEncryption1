@@ -107,7 +107,7 @@ namespace Quantum.API.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<User>> Login(LoginRequest login)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x=>x.Name == login.Name && x.CNIC == login.CNIC && x.Password == login.Password);
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.Email == login.Email && x.Password == login.Password);
             if (user == null)
             {
                 return NotFound();

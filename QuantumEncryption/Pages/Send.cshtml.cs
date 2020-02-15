@@ -80,8 +80,10 @@ namespace QuantumEncryption.Pages
             _appDbContext.UserDatas.Add(userdata);
             _appDbContext.SaveChanges();
             #endregion
-            
-            return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");
+            ViewData["result"] = encryptesData;
+            return Page();
+
+            //return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");
         }
         
         public JsonResult OnGetConnect(int Id)

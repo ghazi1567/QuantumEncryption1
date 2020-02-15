@@ -11,7 +11,7 @@
         <div id="msg">
 
         </div>
-        <div class="panel panel-primary" >
+        <div class="panel panel-primary">
             <div class="panel-heading text-center">Decrypt</div>
             <div class="panel-body">
 
@@ -34,7 +34,17 @@
 
             </div>
         </div>
-       
+        @if (@ViewData["result"] != null)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">Result</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <textarea style="height: 200px;" disabled class="form-control">@ViewData["result"]</textarea>
+                    </div>
+                </div>
+            </div>
+        }
         <br />
         <br />
         <div class="row">
@@ -70,9 +80,9 @@
                     </div>
                 </div>
             </div>
-                
-            </div>
-</main>
+
+        </div>
+    </main>
 </div>
 @section Scripts{
     <script>

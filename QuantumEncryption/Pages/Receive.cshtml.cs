@@ -31,18 +31,19 @@ namespace QuantumEncryption.Pages
 
         public ActionResult OnGet(int Id)
         {
-            SessionModel = _service.GetCurrentUser(Id);
+            setSessionData(Id);
+           
             if (string.IsNullOrEmpty(SessionModel.UserKey) || string.IsNullOrEmpty(SessionModel.UserName))
             {
                 return RedirectToPage("Login");
             }
-            UserDatas = _appDbContext.UserDatas.Where(x => x.ReceiverName == SessionModel.UserName).ToList();
-
+           
             return Page();
         }
 
-        public async Task<FileResult> OnPostDecryptAsync(int Id)
+        public async Task<ActionResult> OnPostDecryptAsync(int Id)
         {
+            setSessionData(Id);
             var filePath = Path.GetTempFileName();
             //var result ="";
             string fileContents;
@@ -55,13 +56,21 @@ namespace QuantumEncryption.Pages
                 fileContents = reader.ReadToEnd();
             }
             var user = await _appDbContext.LoggedInUsers.FindAsync(Id);
-            return File(Encoding.UTF8.GetBytes(RSA.StartDecryption(fileContents,user.UserPrivateKey)), "text/plain", "DecryptedText.txt");
+            var decrypt = RSA.StartDecryption(fileContents, user.UserPrivateKey);
+            ViewData["result"] = decrypt;
+            return Page();
+            // return File(Encoding.UTF8.GetBytes(decrypt), "text/plain", "DecryptedText.txt");
         }
         public ActionResult OnGetDownload(int Id)
         {
             
             var data = _appDbContext.UserDatas.Find(Id);
             return File(Encoding.UTF8.GetBytes(data.EncryptedData), "text/plain", "EcryptedText.txt");
+        }
+        private void setSessionData(int Id)
+        {
+            SessionModel = _service.GetCurrentUser(Id);
+            UserDatas = _appDbContext.UserDatas.Where(x => x.ReceiverName == SessionModel.UserName).ToList();
         }
     }
 }

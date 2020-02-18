@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -56,8 +57,12 @@ namespace QuantumEncryption.Pages
                 fileContents = reader.ReadToEnd();
             }
             var user = await _appDbContext.LoggedInUsers.FindAsync(Id);
+          
+            Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
             var decrypt = RSA.StartDecryption(fileContents, user.UserPrivateKey);
+            stopwatch.Stop();
             ViewData["result"] = decrypt;
+            ViewData["DecryptionTime"] = stopwatch.ElapsedMilliseconds.ToString();
             return Page();
             // return File(Encoding.UTF8.GetBytes(decrypt), "text/plain", "DecryptedText.txt");
         }

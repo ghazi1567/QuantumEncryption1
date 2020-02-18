@@ -34,6 +34,17 @@
 
             </div>
         </div>
+        @if (@ViewData["DecryptionTime"] != null)
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">Decryption Time</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" disabled name="DecryptionTime" value="@ViewData["DecryptionTime"]" />
+                    </div>
+                </div>
+            </div>
+        }
         @if (@ViewData["result"] != null)
         {
             <div class="panel panel-primary">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -65,8 +66,11 @@ namespace QuantumEncryption.Pages
             }
             #endregion
 
+            Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
+            var encryptesData = RSA.StartEncryption(fileContents, ReceiverKey);
+            stopwatch.Stop();
             // Encryotion
-            var encryptesData = RSA.StartEncryption(fileContents,ReceiverKey);
+           
 
             #region Sending data to Receiver
             var userdata = new UserData
@@ -81,6 +85,8 @@ namespace QuantumEncryption.Pages
             _appDbContext.SaveChanges();
             #endregion
             ViewData["result"] = encryptesData;
+            ViewData["EncryptionTime"] = stopwatch.ElapsedMilliseconds.ToString();
+
             return Page();
 
             //return File(Encoding.UTF8.GetBytes(encryptesData), "text/plain", "EncryptedText.txt");

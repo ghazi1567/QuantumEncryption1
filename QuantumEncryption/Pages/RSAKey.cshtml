@@ -12,26 +12,29 @@
 
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Quantum Key</div>
+                        <div class="panel-heading">Quantum Key Information</div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                @if (!string.IsNullOrEmpty(Model.SessionModel.Binary))
-                                {
-                                    <label for="exampleInputEmail1">@Model.SessionModel.Binary </label>
-                                }
-                                @if (!string.IsNullOrEmpty(Model.SessionModel.Decimal))
-                                {
-                                    <label for="exampleInputPassword1">@Model.SessionModel.Decimal </label>
-                                }
+
+                            @if (!string.IsNullOrEmpty(Model.SessionModel.Binary))
+                            {
+                                <div class="form-group">
+                                    <label>Binary : @Model.SessionModel.Binary </label>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.SessionModel.Decimal))
+                            {
+                                <div class="form-group">
+                                    <label>Decimal : @Model.SessionModel.Decimal </label>
+                                </div>
+                            }
+                            @*<div class="form-group">
+                                <label for="exampleInputPassword1">Q-Key Calculation Speed:</label>
 
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Q-Key Calculation Speed:</label>
-                                
-                            </div>
-                            <div class="form-group">
                                 <label for="exampleInputPassword1">Q-Key Calculation Time:</label>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
 
@@ -41,17 +44,20 @@
                         <div class="panel-heading">RSA Key</div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">P : @Model.SessionModel.P</label> <label for="exampleInputPassword1">Q : @Model.SessionModel.Q</label>
+                                <label >P : @Model.SessionModel.P</label> 
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Public Key: @Model.SessionModel.UserPublicKey</label>
-                            </div>   
+                               <label >Q : @Model.SessionModel.Q</label>
+                            </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Private Key: @Model.SessionModel.UserPrivateKey</label>
+                                <label >Public Key: @Model.SessionModel.UserPublicKey</label>
+                            </div>
+                            <div class="form-group">
+                                <label >Private Key: @Model.SessionModel.UserPrivateKey</label>
                             </div>
                         </div>
                     </div>
-
+                    <a href="/Send" class="btn btn-primary">Proceed For Encryption</a>
                 </div>
 
             </div>

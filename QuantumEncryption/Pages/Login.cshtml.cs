@@ -41,7 +41,7 @@ namespace QuantumEncryption.Pages
                  SessionId = HttpContext.Session.Id
             };
             var result = _service.LoggedInUser(user);
-            return RedirectToPage("Send",new { id = result.LoggedInUserId });
+            return RedirectToPage("RSAKey",new { id = result.LoggedInUserId });
         }
         public ActionResult OnGetLogout(int Id)
         {
